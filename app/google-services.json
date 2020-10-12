@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "634423244915",
+    "firebase_url": "https://superlist-6d0dd.firebaseio.com",
+    "project_id": "superlist-6d0dd",
+    "storage_bucket": "superlist-6d0dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634423244915:android:f9c2d43744cbc5bd7d1206",
+        "android_client_info": {
+          "package_name": "com.pratt.superlist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634423244915-gsot5ds45nphot3bhms9de79imsuc6md.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pratt.superlist",
+            "certificate_hash": "7082d5eab1e127788e50b7142acd83f3d6e5b451"
+          }
+        },
+        {
+          "client_id": "634423244915-10qecmulnkua4b396mad6tj3r3jrg3ae.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq0F0XfFwFVseMFRCDjRmL9PvOMWhCke0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634423244915-10qecmulnkua4b396mad6tj3r3jrg3ae.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
