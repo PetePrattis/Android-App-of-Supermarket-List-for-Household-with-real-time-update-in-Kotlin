@@ -26,13 +26,9 @@ class MainActivity : AppCompatActivity() {
         database = Firebase.database.reference
         // [END initialize_database_ref]
 
-        Update.setOnClickListener(){ updateDB() }
+        
 
     }
 
-    fun updateDB(){
-        val name = SuperName.text .toString()
-        database.child("list").child("items").child("name").setValue(name)
-        SuperName.setText("")
-    }
+
 }
