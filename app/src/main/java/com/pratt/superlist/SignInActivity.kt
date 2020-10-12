@@ -20,6 +20,10 @@ class SignInActivity : AppCompatActivity() {
             singinUser()
         }
 
+        signupb.setOnClickListener{
+            signupUser()
+        }
+
     }
 
     private fun singinUser(){
@@ -43,5 +47,11 @@ class SignInActivity : AppCompatActivity() {
                 }
         }
 
+    }
+    private fun signupUser(){
+        val intent = Intent(this@SignInActivity, SignUpActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        finish()
     }
 }

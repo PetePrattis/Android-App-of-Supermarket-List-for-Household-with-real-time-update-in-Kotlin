@@ -1,5 +1,6 @@
 package com.pratt.superlist
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -31,6 +32,16 @@ class MainActivity : AppCompatActivity() {
 
         uname.text = uid
 
+        signoutb.setOnClickListener {
+            singoutUser()
+        }
+
+    }
+    private fun singoutUser(){
+        FirebaseAuth.getInstance().signOut()
+        val intent = Intent(this@MainActivity, WelcomeScreen::class.java)
+        startActivity(intent)
+        finish()
     }
 
 
