@@ -1,15 +1,21 @@
 package com.pratt.superlist
 
 import android.content.Intent
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
+import com.facebook.login.LoginManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 
 class MainActivity : AppCompatActivity() {
@@ -29,8 +35,10 @@ class MainActivity : AppCompatActivity() {
         // [END initialize_database_ref]
 
         val uid = FirebaseAuth.getInstance().currentUser?.uid
+        val uemail = FirebaseAuth.getInstance().currentUser?.email
 
-        uname.text = uid
+
+        uname.text = uemail
 
         signoutb.setOnClickListener {
             singoutUser()
@@ -39,10 +47,12 @@ class MainActivity : AppCompatActivity() {
     }
     private fun singoutUser(){
         FirebaseAuth.getInstance().signOut()
+        LoginManager.getInstance().logOut();
         val intent = Intent(this@MainActivity, WelcomeScreen::class.java)
         startActivity(intent)
         finish()
     }
+
 
 
 }
