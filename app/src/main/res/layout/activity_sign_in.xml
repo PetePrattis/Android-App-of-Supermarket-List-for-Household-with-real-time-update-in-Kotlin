@@ -58,7 +58,7 @@
 
     //com.facebook.login.widget.LoginButton
 
-    <Button
+    <com.facebook.login.widget.LoginButton
         android:id="@+id/fbsigninb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

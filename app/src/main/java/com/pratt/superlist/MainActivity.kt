@@ -36,9 +36,10 @@ class MainActivity : AppCompatActivity() {
 
         val uid = FirebaseAuth.getInstance().currentUser?.uid
         val uemail = FirebaseAuth.getInstance().currentUser?.email
+        val username = FirebaseAuth.getInstance().currentUser?.displayName
 
 
-        uname.text = uemail
+        uname.text = username
 
         signoutb.setOnClickListener {
             singoutUser()
