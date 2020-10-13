@@ -3,6 +3,8 @@ package com.pratt.superlist
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +12,6 @@ import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
-import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -45,10 +46,12 @@ class SignInActivity : AppCompatActivity() {
         callbackManager = CallbackManager.Factory.create()
 
         //fbsigninb.setReadPermissions(Arrays.asList("email"))
-        fbsigninb.registerCallback(callbackManager, object : FacebookCallback<LoginResult>{
+        fbsigninb.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onSuccess(result: LoginResult) {
                 Log.e("!!!!!!!!", "INSIDE onSuccess")
                 handleFacebookAccessToken(result.accessToken)
+                //val intent = Intent(this@SignInActivity, WelcomeScreen::class.java)
+                //startActivity(intent)
             }
 
             override fun onCancel() {
@@ -150,15 +153,17 @@ class SignInActivity : AppCompatActivity() {
                     )
             }
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         Log.e("!!!!!!!!", "Inside onActivityResult")
+        //todo hide everything from screen
         getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
         );
         callbackManager.onActivityResult(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
-
+        
 
     }
 

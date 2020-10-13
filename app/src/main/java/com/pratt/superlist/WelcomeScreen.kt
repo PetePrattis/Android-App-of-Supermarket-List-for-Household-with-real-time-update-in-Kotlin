@@ -1,11 +1,13 @@
 package com.pratt.superlist
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import androidx.appcompat.app.AppCompatActivity
+import com.facebook.AccessToken
 import com.google.firebase.auth.FirebaseAuth
+
 
 class WelcomeScreen : AppCompatActivity() {
 
@@ -15,12 +17,25 @@ class WelcomeScreen : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             val user = FirebaseAuth.getInstance().currentUser
-            if(user != null) {
+
+            val accessToken = AccessToken.getCurrentAccessToken()
+            val isLoggedIn = accessToken != null && !accessToken.isExpired
+
+
+            if (user != null) {
+                for (user in FirebaseAuth.getInstance().currentUser!!.providerData) {
+                    if (user.providerId == "facebook.com") {
+                        if (isLoggedIn)
+                            startMainActivity()
+                        else
+                            startSignInActivity()
+                    }
+                }
                 startMainActivity()
             } else {
                 startSignInActivity()
             }
-        },1500)
+        }, 1500)
     }
 
     private fun startSignInActivity() {
