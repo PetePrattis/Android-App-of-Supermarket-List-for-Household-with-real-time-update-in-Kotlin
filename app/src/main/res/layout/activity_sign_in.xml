@@ -44,6 +44,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
+
     <Button
         android:id="@+id/signupb"
         android:layout_width="wrap_content"
@@ -54,9 +55,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signinb"
-        app:layout_constraintVertical_bias="0.659" />
-
-    //com.facebook.login.widget.LoginButton
+        app:layout_constraintVertical_bias="0.88" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/fbsigninb"
@@ -64,6 +63,15 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/signupb"
         app:layout_constraintTop_toBottomOf="@+id/signinb"
+        app:layout_constraintVertical_bias="0.75"
         tools:layout_editor_absoluteX="0dp" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/googlesignin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/fbsigninb"
+        app:layout_constraintTop_toBottomOf="@+id/signinb"
+        tools:layout_editor_absoluteX="-51dp"></com.google.android.gms.common.SignInButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
