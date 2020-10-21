@@ -45,5 +45,8 @@ dependencies {
 
     implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
 
+    //material dialogs
+    implementation 'com.afollestad.material-dialogs:core:3.3.0'
+
 }
 apply plugin: 'com.google.gms.google-services'

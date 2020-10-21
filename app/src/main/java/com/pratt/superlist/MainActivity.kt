@@ -4,11 +4,18 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
+import android.view.View.inflate
+import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
 import com.facebook.AccessToken
 import com.facebook.FacebookSdk
 import com.facebook.GraphRequest
@@ -66,35 +73,29 @@ class MainActivity : AppCompatActivity() {
 
 
     fun openDialog(){
-        try {
-            //inflate dialog with custom view
-            val dialogNewHouseholdView = LayoutInflater.from(this).inflate(R.layout.layout_dialognewhousehold,null, false)
-            //AlertDialogBuilder
-            val builder = AlertDialog.Builder(this)
-                .setView(dialogNewHouseholdView)
-                .setTitle("Create New Household")
-            //show dialog
-            val mAlertDialog = builder.show()
 
-            //create button click custom layout
-            dialogNewHouseholdView.newhouseholdb.setOnClickListener {
-                //check if inputs exist
-                //dismiss dialog
-                mAlertDialog.dismiss()
-                //get household info
-                val householdname = dialogNewHouseholdView.hnameet.text.toString()
-                val householdpassword = dialogNewHouseholdView.hpasswordet.text.toString()
-                //create household child in firebase realtime db
+        val dialog = MaterialDialog(this)
+            .noAutoDismiss()
+            .customView(R.layout.layout_dialognewhousehold)
 
-            }
-            dialogNewHouseholdView.dialogcancelhouseholdb.setOnClickListener {
-                //dismiss dialog
-                mAlertDialog.dismiss()
-            }
-        }
-        catch (e: Exception){
+        dialog.findViewById<Button>(R.id.dialogcreatehousholdb).setOnClickListener {
+            Log.e("Here","onclick create")
+            //check if inputs exist
+            //dismiss dialog
+            dialog.dismiss()
+            //get household info
+            //val householdname = dialogNewHouseholdView.hnameet.text.toString()
+            //val householdpassword = dialogNewHouseholdView.hpasswordet.text.toString()
+            //create household child in firebase realtime db
 
         }
+        dialog.findViewById<Button>(R.id.dialogcancelhouseholdb).setOnClickListener {
+            Log.e("Here","onclick cancel")
+            dialog.dismiss()
+
+        }
+
+        dialog.show()
 
     }
 
