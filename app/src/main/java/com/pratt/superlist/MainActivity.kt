@@ -14,6 +14,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.facebook.AccessToken
@@ -22,7 +23,10 @@ import com.facebook.GraphRequest
 import com.facebook.HttpMethod
 import com.facebook.login.LoginManager
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
@@ -30,6 +34,7 @@ import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.layout_dialognewhousehold.view.*
 import java.lang.Exception
 import java.lang.NullPointerException
+import java.util.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
@@ -37,6 +42,10 @@ class MainActivity : AppCompatActivity() {
     // [START declare_database_ref]
     private lateinit var database: DatabaseReference
     // [END declare_database_ref]
+
+    lateinit var mRecyclerView: RecyclerView
+
+    lateinit var householdList: ArrayList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +59,23 @@ class MainActivity : AppCompatActivity() {
         val uemail = FirebaseAuth.getInstance().currentUser?.email
         val username = FirebaseAuth.getInstance().currentUser?.displayName
 
+        database.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                householdList.clear()
+                for (child : DataSnapshot in snapshot.child("users").child(uid.toString()).child("households").children){
+                    val key = child.key.toString()
+                    householdList.add(key)
+                    Log.e("Household ", key)
+                }
+                showHouseholds(householdList)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e(TAG, "loadPost:onCancelled", error.toException())
+            }
+        })
+
+
         newhouseholdb.setOnClickListener {
             openDialog()
         }
@@ -57,6 +83,10 @@ class MainActivity : AppCompatActivity() {
         signoutb.setOnClickListener {
             singoutUser()
         }
+
+    }
+
+    private fun showHouseholds(list: ArrayList<String>){
 
     }
 

@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+
     <Button
         android:id="@+id/signoutb"
         android:layout_width="wrap_content"
@@ -29,4 +31,14 @@
         android:layout_marginBottom="267dp"
         android:gravity="center_horizontal"
         android:text="Create new Household" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/householdlistrv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="466dp" />
+
 </RelativeLayout>
