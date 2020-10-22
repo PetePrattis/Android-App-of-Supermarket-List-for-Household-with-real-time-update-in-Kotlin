@@ -175,6 +175,7 @@ class SignInActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLi
                     if (isNew)
                         registernewfbUser()
                     else{
+
                         val intent = Intent(this@SignInActivity, MainActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
@@ -226,10 +227,15 @@ class SignInActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLi
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("SignInActivity", "signInWithCredential:success")
                     val user = mAuth.currentUser
+                    //todo
+                    //-------------------------------------------------//
+                    //υλοποίησε μια αντίστοιχη function με την registernewfbUser() αντί για τον παρακάτω κώδικα ονόματι registernewgmailUser()
+                    //οι δύο αυτές functions θα έχουν ίδια λειτουργία και θα πρέπει να ελέγξεις οτι λειτουργεί η εισαγωγή των πληροφοριών του νέου χρήστη στην βάση
                     val intent = Intent(this@SignInActivity, MainActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
                     finish()
+                    //------------------------------------------------//
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("SignInActivity", "signInWithCredential:failure", task.exception)

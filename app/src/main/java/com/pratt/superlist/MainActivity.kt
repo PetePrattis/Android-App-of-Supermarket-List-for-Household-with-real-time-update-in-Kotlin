@@ -54,8 +54,6 @@ class MainActivity : AppCompatActivity() {
             openDialog()
         }
 
-
-
         signoutb.setOnClickListener {
             singoutUser()
         }
@@ -92,7 +90,6 @@ class MainActivity : AppCompatActivity() {
         dialog.findViewById<Button>(R.id.dialogcancelhouseholdb).setOnClickListener {
             Log.e("Here","onclick cancel")
             dialog.dismiss()
-
         }
 
         dialog.show()
