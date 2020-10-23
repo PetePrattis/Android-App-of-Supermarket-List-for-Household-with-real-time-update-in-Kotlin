@@ -45,7 +45,16 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var mRecyclerView: RecyclerView
 
-    lateinit var householdList: ArrayList<String>
+    private var householdkeyList: ArrayList<String> = arrayListOf()
+    private var householdnameList: ArrayList<String> = arrayListOf()
+
+    private var firebaseQueries: FirebaseQueries = FirebaseQueries()
+
+    private var hList: List<HouseholdsModel> = ArrayList()
+    private var hListAdapter: HouseholdsListAdapter = HouseholdsListAdapter(hList)
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,25 +64,9 @@ class MainActivity : AppCompatActivity() {
         database = Firebase.database.reference
         // [END initialize_database_ref]
 
-        val uid = FirebaseAuth.getInstance().currentUser?.uid
-        val uemail = FirebaseAuth.getInstance().currentUser?.email
-        val username = FirebaseAuth.getInstance().currentUser?.displayName
+        loadHouseholdInfo()
 
-        database.addListenerForSingleValueEvent(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                householdList.clear()
-                for (child : DataSnapshot in snapshot.child("users").child(uid.toString()).child("households").children){
-                    val key = child.key.toString()
-                    householdList.add(key)
-                    Log.e("Household ", key)
-                }
-                showHouseholds(householdList)
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                Log.e(TAG, "loadPost:onCancelled", error.toException())
-            }
-        })
 
 
         newhouseholdb.setOnClickListener {
@@ -86,8 +79,39 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun showHouseholds(list: ArrayList<String>){
+    private fun loadHouseholdInfo(){
+        val uid = firebaseQueries.getUser()?.uid
+        val uemail = firebaseQueries.getUser()?.email
+        val username = firebaseQueries.getUser()?.displayName
 
+        database.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                householdkeyList.clear()
+                householdnameList.clear()
+                for (child: DataSnapshot in snapshot.child("users").child(uid.toString())
+                    .child("households").children) {
+                    val hkey = child.key.toString()
+                    householdkeyList.add(hkey)
+                    Log.e("Household ", hkey)
+                }
+                for (key in householdkeyList) {
+                    for (child: DataSnapshot in snapshot.child("households").children) {
+                        if (key == child.key.toString()) {
+                            val hname = child.child("h_name").value.toString()
+                            householdnameList.add(hname)
+                            Log.e("Household ", hname)
+                            break
+                        }
+
+                    }
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e(TAG, "loadPost:onCancelled", error.toException())
+            }
+        })
     }
 
     private fun singoutUser(){
