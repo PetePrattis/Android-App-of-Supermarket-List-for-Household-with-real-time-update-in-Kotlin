@@ -23,4 +23,6 @@ class FirebaseQueries {
 //    fun getHouseholdsList(): Task<Que>{
 //        return database.
 //    }
+
+    //todo(every firebase related query here)
 }
